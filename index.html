@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thirukkural: The Eternal Wisdom</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'background': 'var(--color-background)',
+              'primary-text': 'var(--color-primary-text)',
+              'secondary-text': 'var(--color-secondary-text)',
+              'accent': 'var(--color-accent)',
+              'highlight': 'var(--color-highlight)',
+              'border-color': 'var(--color-border)',
+              'card-bg': 'var(--color-card-bg)',
+            },
+            fontFamily: {
+              'serif': ['Georgia', 'serif'],
+              'sans': ['Inter', 'sans-serif'],
+            }
+          }
+        }
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.1.1/",
+    "react": "https://aistudiocdn.com/react@^19.1.1",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.20.0",
+    "react-dom": "https://aistudiocdn.com/react-dom@^19.1.1",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.1.1/"
+  }
+}
+</script>
+<style>
+  /* Base font size variables */
+  :root {
+    --font-size-base: 16px;
+  }
+  .font-size-sm { --font-size-base: 14px; }
+  .font-size-lg { --font-size-base: 18px; }
+  html {
+    font-size: var(--font-size-base);
+  }
+  
+  /* Theme color variables */
+  .theme-light {
+    --color-background: #f8f7f2;
+    --color-primary-text: #2c3e50;
+    --color-secondary-text: #5a6a7a;
+    --color-accent: #d35400;
+    --color-highlight: #ecf0f1;
+    --color-border: #bdc3c7;
+    --color-card-bg: #ffffff;
+  }
+
+  .theme-dark {
+    --color-background: #1a202c;
+    --color-primary-text: #e2e8f0;
+    --color-secondary-text: #a0aec0;
+    --color-accent: #f6ad55;
+    --color-highlight: #2d3748;
+    --color-border: #4a5568;
+    --color-card-bg: #2d3748;
+  }
+
+  .theme-sepia {
+    --color-background: #fbf0d9;
+    --color-primary-text: #5b4636;
+    --color-secondary-text: #8d6e63;
+    --color-accent: #8c5a3b;
+    --color-highlight: #efebe9;
+    --color-border: #d7ccc8;
+    --color-card-bg: #fffaf0;
+  }
+
+
+  /* Custom Tooltip Styles */
+  .tooltip {
+    position: relative;
+    display: inline-block;
+  }
+
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 240px;
+    background-color: var(--color-primary-text);
+    color: var(--color-background);
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px;
+    position: absolute;
+    z-index: 10;
+    
+    /* Position to the left */
+    top: 50%;
+    right: 110%; /* A little gap from the icon */
+    transform: translateY(-50%);
+    
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    font-size: 0.875rem; /* text-sm */
+    line-height: 1.25rem; /* leading-tight */
+    font-weight: 400; /* font-normal */
+  }
+  
+  .tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 100%; /* Position arrow on the right side of the tooltip */
+    margin-top: -5px; /* Vertically center */
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent var(--color-primary-text); /* Right-pointing arrow */
+  }
+
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  /* Tooltip for header icons */
+  .tooltip.tooltip-header .tooltiptext {
+    top: 140%;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    width: max-content;
+    max-width: 280px;
+  }
+
+  .tooltip.tooltip-header .tooltiptext::after {
+    bottom: 100%;
+    top: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-left: -5px;
+    border-color: transparent transparent var(--color-primary-text) transparent;
+  }
+
+
+  /* Modal fade-in animation */
+  @keyframes fade-in {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  .animate-fade-in {
+    animation: fade-in 0.2s ease-out forwards;
+  }
+</style>
+</head>
+  <body class="bg-background">
+    <div id="root"></div>
+    <script type="module" src="/src/index.tsx"></script>
+  </body>
+</html>
