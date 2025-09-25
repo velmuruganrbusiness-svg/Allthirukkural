@@ -9,14 +9,13 @@ interface NavigationPanelProps {
     data: ThirukkuralData | null;
     onSelectAdhigaram: (index: number) => void;
     onShowFavorites: () => void;
-    onShowThemes: () => void;
     onShowAllKurals: () => void;
     isOpen: boolean;
     onClose: () => void;
     language: Language;
 }
 
-const NavigationPanel: React.FC<NavigationPanelProps> = ({ data, onSelectAdhigaram, onShowFavorites, onShowThemes, onShowAllKurals, isOpen, onClose, language }) => {
+const NavigationPanel: React.FC<NavigationPanelProps> = ({ data, onSelectAdhigaram, onShowFavorites, onShowAllKurals, isOpen, onClose, language }) => {
     const [openPaals, setOpenPaals] = useState<number[]>([0]);
     const [openIyals, setOpenIyals] = useState<string[]>(['0-0']); 
 
@@ -51,10 +50,6 @@ const NavigationPanel: React.FC<NavigationPanelProps> = ({ data, onSelectAdhigar
                  <button onClick={onShowAllKurals} className="w-full flex items-center p-2 text-left font-semibold text-lg hover:bg-border-color/50 rounded-md transition-colors mt-1">
                     <BookOpenIcon className="w-5 h-5 mr-3 text-accent" />
                     <span>{currentStrings.fullThirukkural}</span>
-                </button>
-                <button onClick={onShowThemes} className="w-full flex items-center p-2 text-left font-semibold text-lg hover:bg-border-color/50 rounded-md transition-colors mt-1">
-                    <TagIcon className="w-5 h-5 mr-3 text-accent" />
-                    <span>{currentStrings.exploreThemes}</span>
                 </button>
             </div>
             {data && (() => {

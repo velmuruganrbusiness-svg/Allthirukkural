@@ -9,7 +9,6 @@ import { useFavorites } from './hooks/useFavorites';
 import AboutSection from './components/AboutSection';
 import AboutThiruvalluvar from './components/AboutThiruvalluvar';
 import { uiStrings } from './uiStrings';
-import ThemesPage from './components/ThemesPage';
 import { LoaderIcon } from './components/Icons';
 import Breadcrumb from './components/Breadcrumb';
 import { useSettings } from './hooks/useSettings';
@@ -53,7 +52,7 @@ const levenshteinDistance = (a: string, b: string): number => {
 
 
 type Language = 'en' | 'ta';
-type ViewMode = 'home' | 'list' | 'favorites' | 'themes' | 'allKurals';
+type ViewMode = 'home' | 'list' | 'favorites' | 'allKurals';
 
 const App: React.FC = () => {
     const [data, setData] = useState<ThirukkuralData | null>(null);
@@ -273,13 +272,6 @@ const App: React.FC = () => {
         setSelectedAdhigaramIndex(null);
     }, []);
     
-    const handleShowThemes = useCallback(() => {
-        setViewMode('themes');
-        setIsNavOpen(false);
-        setSearchQuery('');
-        setSelectedAdhigaramIndex(null);
-    }, []);
-    
     const handleShowAllKurals = useCallback(() => {
         setViewMode('allKurals');
         setIsNavOpen(false);
@@ -297,8 +289,6 @@ const App: React.FC = () => {
                 return []; // No breadcrumbs on home
             case 'favorites':
                 return [homeItem, { label: uiStrings[language].myFavorites }];
-            case 'themes':
-                return [homeItem, { label: uiStrings[language].exploreThemes }];
             case 'allKurals':
                 return [homeItem, { label: uiStrings[language].fullThirukkural }];
             case 'list':
@@ -356,14 +346,6 @@ const App: React.FC = () => {
                         language={language}
                     />
                 );
-            case 'themes':
-                return (
-                    <ThemesPage 
-                        allKurals={allKurals}
-                        onKuralClick={handleSelectKural}
-                        language={language}
-                    />
-                );
             case 'allKurals':
                 return (
                     <AllKuralsView 
@@ -416,7 +398,6 @@ const App: React.FC = () => {
                         data={data} 
                         onSelectAdhigaram={handleSelectAdhigaram}
                         onShowFavorites={handleShowFavorites}
-                        onShowThemes={handleShowThemes}
                         onShowAllKurals={handleShowAllKurals}
                         isOpen={isNavOpen}
                         onClose={() => setIsNavOpen(false)}

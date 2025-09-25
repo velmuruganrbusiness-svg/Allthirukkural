@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Kural } from '../types';
-import { getThemesForKural } from '../services/geminiService';
-import { HeartIcon, HeartIconSolid, LoaderIcon, ShareIcon, SparklesIcon, XIcon, SpeakerIcon, InfoIcon } from './Icons';
+import { HeartIcon, HeartIconSolid, ShareIcon, XIcon, SpeakerIcon, InfoIcon } from './Icons';
 import { uiStrings } from '../uiStrings';
-import { useThemes } from '../hooks/useThemes';
 
 type Language = 'en' | 'ta';
 
@@ -17,10 +15,6 @@ interface KuralDetailViewProps {
 
 const KuralDetailView: React.FC<KuralDetailViewProps> = ({ kural, onClose, isFavorite, onToggleFavorite, language }) => {
     const [activeTab, setActiveTab] = useState('translations');
-    const [themes, setThemes] = useState<string[]>([]);
-    const [isLoadingThemes, setIsLoadingThemes] = useState(false);
-    const [error, setError] = useState<string | null>(null);
-    const { addThemesForKural } = useThemes();
     const currentStrings = uiStrings[language];
     const [isAudioSupported, setIsAudioSupported] = useState(false);
     const [hasTamilVoice, setHasTamilVoice] = useState(false);
@@ -49,21 +43,6 @@ const KuralDetailView: React.FC<KuralDetailViewProps> = ({ kural, onClose, isFav
             };
         }
     }, []);
-
-    const handleGenerateThemes = async () => {
-        setIsLoadingThemes(true);
-        setError(null);
-        try {
-            const result = await getThemesForKural(kural);
-            setThemes(result.themes);
-            addThemesForKural(kural.number, result.themes);
-        } catch (err) {
-            setError(currentStrings.themesError);
-            console.error(err);
-        } finally {
-            setIsLoadingThemes(false);
-        }
-    };
     
     const handleShare = () => {
         const shareText = `Kural ${kural.number}:\n\n${kural.tamil}\n\nEnglish: ${kural.translations.en}\n\nExplore more at Thirukkural: The Eternal Wisdom`;
@@ -185,24 +164,6 @@ const KuralDetailView: React.FC<KuralDetailViewProps> = ({ kural, onClose, isFav
                                 );
                             })()}
                         </div>
-                    </div>
-
-                    <div className="bg-highlight p-4 rounded-lg">
-                        <button onClick={handleGenerateThemes} disabled={isLoadingThemes} className="w-full flex items-center justify-center px-4 py-2 bg-accent text-white rounded-md hover:bg-accent/90 transition-colors disabled:bg-gray-400">
-                           {isLoadingThemes ? <LoaderIcon className="w-5 h-5 animate-spin mr-2" /> : <SparklesIcon className="w-5 h-5 mr-2" />}
-                           {isLoadingThemes ? currentStrings.generating : currentStrings.generateThemes}
-                        </button>
-                        {error && <p className="text-red-500 mt-2 text-sm">{error}</p>}
-                        {themes.length > 0 && (
-                            <div className="mt-4">
-                                <h4 className="font-semibold text-primary-text mb-2">{currentStrings.thematicTags}:</h4>
-                                <div className="flex flex-wrap gap-2">
-                                    {themes.map((theme, index) => (
-                                        <span key={index} className="px-3 py-1 bg-card-bg border border-border-color text-secondary-text rounded-full text-sm">{theme}</span>
-                                    ))}
-                                </div>
-                            </div>
-                        )}
                     </div>
                 </div>
             </div>
