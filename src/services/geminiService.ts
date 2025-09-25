@@ -1,14 +1,25 @@
+
 import { GoogleGenAI, Type } from "@google/genai";
 import { Kural } from "../types";
 
-// Assume API_KEY is set in the environment
-const API_KEY = process.env.API_KEY;
+// Lazily initialize the Gemini client to ensure process.env.API_KEY is available.
+let ai: GoogleGenAI | null = null;
+const getAiClient = (): GoogleGenAI | null => {
+    if (ai) {
+        return ai;
+    }
+    
+    // API key must be obtained from the environment.
+    const API_KEY = process.env.API_KEY;
 
-if (!API_KEY) {
-    console.warn("API key for Gemini not found. AI features will be disabled.");
+    if (!API_KEY) {
+        console.warn("API key for Gemini not found. AI features will be disabled.");
+        return null;
+    }
+    
+    ai = new GoogleGenAI({ apiKey: API_KEY });
+    return ai;
 }
-
-const ai = new GoogleGenAI({ apiKey: API_KEY });
 
 const responseSchema = {
     type: Type.OBJECT,
@@ -25,8 +36,10 @@ const responseSchema = {
 
 
 export const getThemesForKural = async (kural: Kural): Promise<{ themes: string[] }> => {
-    if(!API_KEY) {
-        // Simulate a delay and return mock data if API key is not available
+    const geminiClient = getAiClient();
+
+    if(!geminiClient) {
+        // Simulate a delay and return mock data if API key is not available.
         await new Promise(res => setTimeout(res, 1000));
         return { themes: ["Virtue", "Learning", "Wisdom (Mock)"] };
     }
@@ -45,7 +58,7 @@ export const getThemesForKural = async (kural: Kural): Promise<{ themes: string[
     `;
 
     try {
-        const response = await ai.models.generateContent({
+        const response = await geminiClient.models.generateContent({
             model: "gemini-2.5-flash",
             contents: prompt,
             config: {
