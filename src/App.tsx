@@ -14,6 +14,7 @@ import Breadcrumb from './components/Breadcrumb';
 import { useSettings } from './hooks/useSettings';
 import AllKuralsView from './components/AllKuralsView';
 import Footer from './components/Footer';
+import Quiz from './components/Quiz';
 
 /**
  * Calculates the Levenshtein distance between two strings.
@@ -52,7 +53,7 @@ const levenshteinDistance = (a: string, b: string): number => {
 
 
 type Language = 'en' | 'ta';
-type ViewMode = 'home' | 'list' | 'favorites' | 'allKurals';
+type ViewMode = 'home' | 'list' | 'favorites' | 'allKurals' | 'quiz';
 
 const App: React.FC = () => {
     const [data, setData] = useState<ThirukkuralData | null>(null);
@@ -131,6 +132,13 @@ const App: React.FC = () => {
     const allKurals = useMemo(() => {
         if (!data) return [];
         return data.paals.flatMap(p => p.iyals.flatMap(i => i.adhigarams.flatMap(a => a.kurals)));
+    }, [data]);
+
+    const aramKurals = useMemo(() => {
+        if (!data) return [];
+        const aramPaal = data.paals.find(p => p.name.en === 'Book of Virtue');
+        if (!aramPaal) return [];
+        return aramPaal.iyals.flatMap(i => i.adhigarams.flatMap(a => a.kurals));
     }, [data]);
 
     const favoriteKurals = useMemo(() => {
@@ -279,6 +287,13 @@ const App: React.FC = () => {
         setSelectedAdhigaramIndex(null);
     }, []);
 
+    const handleShowQuiz = useCallback(() => {
+        setViewMode('quiz');
+        setIsNavOpen(false);
+        setSearchQuery('');
+        setSelectedAdhigaramIndex(null);
+    }, []);
+
     const breadcrumbPath = useMemo(() => {
         if (!data) return [];
         
@@ -291,6 +306,8 @@ const App: React.FC = () => {
                 return [homeItem, { label: uiStrings[language].myFavorites }];
             case 'allKurals':
                 return [homeItem, { label: uiStrings[language].fullThirukkural }];
+            case 'quiz':
+                return [homeItem, { label: uiStrings[language].quiz }];
             case 'list':
                 if (searchQuery) {
                     return [homeItem, { label: uiStrings[language].searchResultsTitle }];
@@ -354,6 +371,13 @@ const App: React.FC = () => {
                         language={language}
                     />
                 );
+            case 'quiz':
+                return (
+                    <Quiz
+                        aramKurals={aramKurals}
+                        language={language}
+                    />
+                );
             case 'list':
                  return (
                      <KuralList 
@@ -399,6 +423,7 @@ const App: React.FC = () => {
                         onSelectAdhigaram={handleSelectAdhigaram}
                         onShowFavorites={handleShowFavorites}
                         onShowAllKurals={handleShowAllKurals}
+                        onShowQuiz={handleShowQuiz}
                         isOpen={isNavOpen}
                         onClose={() => setIsNavOpen(false)}
                         language={language}

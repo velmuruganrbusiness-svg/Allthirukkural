@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ThirukkuralData } from '../types';
-import { ChevronDownIcon, ChevronRightIcon, XIcon, HeartIcon, TagIcon, BookOpenIcon } from './Icons';
+import { ChevronDownIcon, ChevronRightIcon, XIcon, HeartIcon, TagIcon, BookOpenIcon, QuizIcon } from './Icons';
 import { uiStrings } from '../uiStrings';
 
 type Language = 'en' | 'ta';
@@ -10,12 +10,13 @@ interface NavigationPanelProps {
     onSelectAdhigaram: (index: number) => void;
     onShowFavorites: () => void;
     onShowAllKurals: () => void;
+    onShowQuiz: () => void;
     isOpen: boolean;
     onClose: () => void;
     language: Language;
 }
 
-const NavigationPanel: React.FC<NavigationPanelProps> = ({ data, onSelectAdhigaram, onShowFavorites, onShowAllKurals, isOpen, onClose, language }) => {
+const NavigationPanel: React.FC<NavigationPanelProps> = ({ data, onSelectAdhigaram, onShowFavorites, onShowAllKurals, onShowQuiz, isOpen, onClose, language }) => {
     const [openPaals, setOpenPaals] = useState<number[]>([0]);
     const [openIyals, setOpenIyals] = useState<string[]>(['0-0']); 
 
@@ -50,6 +51,10 @@ const NavigationPanel: React.FC<NavigationPanelProps> = ({ data, onSelectAdhigar
                  <button onClick={onShowAllKurals} className="w-full flex items-center p-2 text-left font-semibold text-lg hover:bg-border-color/50 rounded-md transition-colors mt-1">
                     <BookOpenIcon className="w-5 h-5 mr-3 text-accent" />
                     <span>{currentStrings.fullThirukkural}</span>
+                </button>
+                <button onClick={onShowQuiz} className="w-full flex items-center p-2 text-left font-semibold text-lg hover:bg-border-color/50 rounded-md transition-colors mt-1">
+                    <QuizIcon className="w-5 h-5 mr-3 text-accent" />
+                    <span>{currentStrings.quiz}</span>
                 </button>
             </div>
             {data && (() => {

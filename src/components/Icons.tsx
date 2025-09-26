@@ -144,3 +144,15 @@ export const LanguageSwapIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props)
     />
   </svg>
 );
+
+export const QuizIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
+    </svg>
+);
+
+export const TrophyIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 18.75h-9a9 9 0 119 0zM16.5 18.75a9 9 0 00-9 0m9 0c.323-.111.634-.234.938-.368m-10.876 0c.304.134.615.257.938.368m10.876-4.132a9 9 0 00-10.876 0m10.876 0l1.454-4.363a1.125 1.125 0 00-1.06-1.558l-1.928.643a1.125 1.125 0 01-1.06-1.558l1.454-4.363m-10.876 0l1.454 4.363a1.125 1.125 0 01-1.06 1.558l-1.928-.643a1.125 1.125 0 00-1.06 1.558l1.454 4.363m0-4.132a9 9 0 0110.876 0" />
+    </svg>
+);
