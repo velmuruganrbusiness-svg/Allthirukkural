@@ -143,7 +143,7 @@ const Quiz: React.FC<QuizProps> = ({ aramKurals, language }) => {
                         disabled={selectedAnswer !== null}
                         className={`p-4 rounded-lg text-left transition-all duration-300 transform ${getButtonClass(option.number)} ${selectedAnswer === null ? 'hover:scale-105' : ''}`}
                     >
-                        <p className="italic text-secondary-text">{option.translations.en}</p>
+                        <p className="italic text-secondary-text">{option.translations[language]}</p>
                     </button>
                 ))}
             </div>

@@ -158,7 +158,7 @@ export const uiStrings = {
     quizTitle: "அறத்துப்பால் வினாடி வினா",
     question: "கேள்வி",
     of: "/",
-    whichKural: "இந்த குறளின் ஆங்கில மொழிபெயர்ப்பு என்ன?",
+    whichKural: "இந்த குறளின் தமிழ் விளக்கம் என்ன?",
     quizResults: "வினாடி வினா முடிவுகள்",
     yourScore: "உங்கள் மதிப்பெண்",
     playAgain: "மீண்டும் விளையாடு",
