@@ -14,7 +14,7 @@ const AboutThiruvalluvar: React.FC<AboutThiruvalluvarProps> = ({ language }) => 
         <div className="bg-card-bg p-6 rounded-lg shadow-md border border-highlight flex flex-col items-center">
             <h2 className="text-2xl md:text-3xl font-bold text-accent font-serif mb-6 text-center">{content.aboutThiruvalluvarTitle}</h2>
             <img 
-                src="/public/assets/thiruvalluvar.svg" 
+                src="./assets/thiruvalluvar.png" 
                 width="150" 
                 height="150" 
                 alt="A portrait of the poet Thiruvalluvar"

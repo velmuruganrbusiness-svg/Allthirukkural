@@ -69,7 +69,16 @@ const App: React.FC = () => {
     useEffect(() => {
         const fetchAllData = async () => {
             try {
-                const files = ['/data/aram.json', '/data/aram2.json', '/data/aram3.json', '/data/aram4.json', '/data/porul.json', '/data/inbam.json'];
+                const files = [
+                    '/data/aram.json', 
+                    '/data/aram2.json', 
+                    '/data/aram3.json', 
+                    '/data/aram4.json', 
+                    '/data/porul.json', 
+                    '/data/inbam.json',
+                    '/data/inbam1.json',
+                    '/data/inbam2.json'
+                ];
                 const responses = await Promise.all(files.map(file => fetch(file).catch(e => {
                     console.warn(`Could not fetch ${file}, skipping. Error: ${e.message}`);
                     return null; // Return null for failed fetches
