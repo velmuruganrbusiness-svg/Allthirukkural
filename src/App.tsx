@@ -1,3 +1,5 @@
+
+
 import React, { useState, useMemo, useCallback, useEffect } from 'react';
 import { Kural, ThirukkuralData, Paal, Iyal } from './types';
 import Header from './components/Header';
@@ -74,7 +76,13 @@ const App: React.FC = () => {
                     '/data/aram2.json', 
                     '/data/aram3.json', 
                     '/data/aram4.json', 
-                    '/data/porul.json', 
+                    '/data/porul.json',
+                    '/data/porul1.json',
+                    '/data/porul2.json',
+                    '/data/porul3.json',
+                    '/data/porul4.json',
+                    '/data/porul5.json',
+                    '/data/porul6.json',
                     '/data/inbam.json',
                     '/data/inbam1.json',
                     '/data/inbam2.json'
